@@ -22,6 +22,7 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { CommonModule } from '@angular/common';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { CommonModule } from '@angular/common';
     RegisterComponent,
     MemberListComponent,
     MemberDetailComponent,
+    MemberEditComponent,
     ListsComponent,
     MessagesComponent,
     TestErrorsComponent,
