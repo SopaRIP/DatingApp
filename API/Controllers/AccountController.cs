@@ -34,16 +34,15 @@ namespace API.Controllers
 
             var user = _mapper.Map<AppUser>(registerDto);
 
-            //New User
             user.UserName = registerDto.Username.ToLower();
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
-            if (result.Succeeded) BadRequest(result.Errors);
+            if (!result.Succeeded) return BadRequest(result.Errors);
 
             var roleResult = await _userManager.AddToRoleAsync(user, "Member");
 
-            if(!roleResult.Succeeded) return BadRequest(result.Errors);
+            if (!roleResult.Succeeded) return BadRequest(result.Errors);
 
             return new UserDto
             {
@@ -52,7 +51,6 @@ namespace API.Controllers
                 KnownAs = user.KnownAs,
                 Gender = user.Gender
             };
-
         }
 
         [HttpPost("login")]
@@ -79,9 +77,9 @@ namespace API.Controllers
             };
         }
 
-        private async Task<bool> UserExists(string Username)
+        private async Task<bool> UserExists(string username)
         {
-            return await _userManager.Users.AnyAsync(x => x.UserName == Username.ToLower());
+            return await _userManager.Users.AnyAsync(x => x.UserName == username.ToLower());
         }
     }
 }
